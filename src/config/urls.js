@@ -1,0 +1,18 @@
+export default {
+  token: '/jwt/token',
+  index: '/orgnizations/000001/summary',
+  orgList: '/api/orgnization/getOrgIdList',
+  terminal: {
+    list: '/api/terminastatus/terstalist2'
+  },
+  sensor: {
+    list: '/api/sensorStstusManager/queryList',
+    detail: '/api/sensorAndTerm/querySensor'
+  },
+  maintain: {
+    list: '/api/maintenanceInfo/queryList2'
+  },
+  alarm: {
+    list: '/api/powerMonitoring/query'
+  }
+}

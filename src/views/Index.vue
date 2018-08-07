@@ -1,7 +1,7 @@
 <template>
   <div class="page page-index">
     <div class="banner"></div>
-    <div class="menu-list">
+    <!-- <div class="menu-list">
       <div class="item">
         <router-link class="mask" to="/overview"></router-link>
         <img src="../assets/img/overview.png" alt="overview">
@@ -32,13 +32,57 @@
         <img src="../assets/img/service.png" alt="service">
         <p>服务窗口</p>
       </div>
+    </div> -->
+    <div>
+      <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="realTime">
+         <div class="tabTitle">
+           <RealTime></RealTime>
+         </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="dataList">
+        </mt-tab-container-item>
+        <mt-tab-container-item id="alarm">
+        </mt-tab-container-item>
+        <mt-tab-container-item id="statement">
+        </mt-tab-container-item>
+        <mt-tab-container-item id="mine">
+        </mt-tab-container-item>
+      </mt-tab-container>
+      <mt-tabbar v-model="selected" fixed>
+        <mt-tab-item id="realTime">
+          <img slot="icon">
+          实时
+        </mt-tab-item>
+        <mt-tab-item id="dataList">
+          <img slot="icon">
+          数据列表信息
+        </mt-tab-item>
+        <mt-tab-item id="alarm">
+          <img slot="icon">
+          报警
+        </mt-tab-item>
+        <mt-tab-item id="statement">
+          <img slot="icon">
+          报表
+        </mt-tab-item>
+        <mt-tab-item id="mine">
+          <img slot="icon">
+          我的
+        </mt-tab-item>
+      </mt-tabbar>
     </div>
   </div>
 </template>
+
 <script>
+import RealTime from './RealTime'
 export default {
+  components: {RealTime},
   data () {
-    return {}
+    return {
+      selected: 'realTime'
+    }
   }
 }
 </script>
@@ -49,7 +93,6 @@ export default {
     height: 3.84rem;
     background: url("../assets/img/banner.png") center center / 100% 100% no-repeat;
   }
-
   .menu-list {
     display: flex;
     justify-content: space-around;

@@ -1,6 +1,5 @@
 <template>
   <div class="page page-index">
-    <div class="banner"></div>
     <!-- <div class="menu-list">
       <div class="item">
         <router-link class="mask" to="/overview"></router-link>
@@ -36,11 +35,11 @@
     <div>
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="realTime">
-         <div class="tabTitle">
-           <RealTime></RealTime>
-         </div>
+          <div class="banner"></div>
+          <RealTime></RealTime>
         </mt-tab-container-item>
         <mt-tab-container-item id="dataList">
+          <Equipment></Equipment>
         </mt-tab-container-item>
         <mt-tab-container-item id="alarm">
         </mt-tab-container-item>
@@ -77,8 +76,13 @@
 
 <script>
 import RealTime from './RealTime'
+import Equipment from './Equipment'
+
 export default {
-  components: {RealTime},
+  components: {
+    RealTime, 
+    Equipment
+  },
   data () {
     return {
       selected: 'realTime'

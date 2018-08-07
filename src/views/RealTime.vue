@@ -71,8 +71,8 @@
 
 <script>
 export default {
-    data () {
-        return {
+    data(){
+        return{
             titleCheck: 'summary',
             showSummary: true,
             showMap: false,

@@ -1,6 +1,6 @@
 <template>
     <div class="realTimeWrap">
-        <div class="tabTitle">
+        <div class="tabTitle" ref="tabTitle">
             <div :class="['tabTitleWrap', titleCheck === 'summary' && 'checked']" @click="changeTab('summary')">
                 <h4>概括总览</h4>
             </div>
@@ -8,7 +8,8 @@
                 <h4>监控地图</h4>
             </div>
         </div>
-        <div v-if="showSummary" class="tabSummary">
+        <!-- 概况纵览 -->
+        <div v-show="showSummary" class="tabSummary" ref="">
             <div class="tabContent">
                 <div>
                     <h2>{{summaryMsg.currAlarmCount}}</h2>
@@ -63,9 +64,8 @@
                 </ul>
             </div>
         </div>
-        <div class="mapWrap">
-            <div id="container"></div>
-        </div>
+        <!-- 监控地图 -->
+        <div class="mapWrap" v-show="showMap" id="container" :style="{height: mapHeight+'px'}"></div>
     </div>
 </template>
 
@@ -77,10 +77,16 @@ export default {
             showSummary: true,
             showMap: false,
             summaryMsg: {},
-            mapStyle: {
-                width: null,
-                height: null
-            }
+            mapHeight: 0
+        }
+    },
+    mounted() {
+        this.getMap();
+    },
+    computed: {
+        // 浏览器高度
+        winHeight() {
+            return document.documentElement.clientHeight;
         }
     },
     methods: {
@@ -107,11 +113,12 @@ export default {
                 }else if(type === 'map'){
                     this.showSummary = false;
                     this.showMap = true;
-                    this.getMap();
+                    this.mapHeight = this.winHeight - this.$refs['tabTitle'].getBoundingClientRect().bottom - 55;
+                    //this.getMap();
                 }
             }
         },
-        //显示地图
+        //初始化地图 住需要加载一次
         getMap(){
             // let screenHeight = window.screen.height;
             // let scal = screenHeight/(5.63*14);
@@ -129,7 +136,7 @@ export default {
     },
     created(){
         //默认获取概括总览信息
-        this.getSummary()
+        this.getSummary();
     }
 }
 </script>
@@ -216,11 +223,7 @@ export default {
             }
         }
         .mapWrap {
-            position: absolute;
-            top: 1em;
-            bottom: 2em;
-            left: 0;
-            right: 0;
+            height: 1px;
         }
     }
 </style>

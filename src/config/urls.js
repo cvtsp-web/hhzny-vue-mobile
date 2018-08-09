@@ -15,7 +15,12 @@ export default {
   alarm: {
     list: '/api/powerMonitoring/query'
   },
+
   realTime: {
-    summary: '/wechat/summary'
+    summary: '/wechat/summary',
+    terminals: '/wechat/terminals'
+  },
+  equipment: {
+    sensors: '/wechat/sensors'
   }
 }

@@ -63,13 +63,13 @@
                 </ul>
             </div>
         </div>
-        <div class="mapWrap">
-            <div id="container"></div>
-        </div>
+        <div class="mapWrap" id="container" :style="mapStyle"></div>
     </div>
 </template>
 
 <script>
+import { setRem } from '../utils'
+
 export default {
     data(){
         return{
@@ -80,13 +80,19 @@ export default {
             mapStyle: {
                 width: null,
                 height: null
-            }
+            },
+            terminalsData: []
         }
     },
     methods: {
         //获取概括总览信息
         getSummary(){
-            this.$axios.get(this.$urls.realTime.summary)
+            this.$axios.get(this.$urls.realTime.summary, {
+                params: {
+                    apiVersion: '1.0', 
+                    orgId: localStorage.getItem('orgId')
+                }
+            })
             .then(({data: res}) => {
                 if(res.rspCode === '0000'){
                     this.summaryMsg = res;
@@ -113,18 +119,107 @@ export default {
         },
         //显示地图
         getMap(){
-            // let screenHeight = window.screen.height;
-            // let scal = screenHeight/(5.63*14);
+            let screenHeight = window.screen.height;
+            let scal = (4.84 * setRem() + 55)/screenHeight;
             // console.log(scal)
-            // this.mapStyle = {
-            //     width: window.screen.width/14 + 'em',
-            //     height: screenHeight*(100-scal) + 'em'
-            // }
-
-             var map = new AMap.Map('container', {
-                center:[117.000923,36.675807],
-                zoom:11
+            this.mapStyle = {
+                width: window.screen.width/setRem() + 'rem',
+                height: screenHeight*(1-scal)/setRem() + 'rem'
+            }
+            this.map = new AMap.Map('container', {
+                resizeEnable: true,
+                center: [121.475137, 31.232781],
+                zoom: 13
             });
+
+            //获取终端列表
+            this.getTerminals();
+        },
+        //获取终端列表在地图上展示
+        getTerminals(){
+            this.$axios.get(this.$urls.realTime.terminals,{
+                params: {
+                    apiVersion: '1.0', 
+                    orgId: localStorage.getItem('orgId')
+                }
+            })
+            .then(({data: res}) => {
+                if(res.rspCode === '0000'){
+                    this.terminalsData = res.terminalList;
+                    this.infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+                    this.terminalsData.forEach(item => {
+                        let marker = new AMap.Marker({
+                            position: [item.termX, item.termY]
+                        });
+
+                        if(item.termStatus === '00'){
+                            item.termStatus = '正常';
+                        }else if(item.termStatus === '01'){
+                            item.termStatus = '异常';
+                        }else if(item.termStatus === '03'){
+                            item.termStatus = '断网';
+                        }
+
+                        if(item.systemType === 'EF'){
+                            item.systemType = '电气火灾监控系统';
+                        }else if(item.systemType === 'FP'){
+                            item.systemType = '消防电源监控系统';
+                        }else if(item.systemType === 'FD'){
+                            item.systemType = '防火门监控系统';
+                        }else if(item.systemType === 'EM'){
+                            item.systemType = '电力分项计量监控系统';
+                        }
+
+                        marker.content = `
+                             <div>
+                                <div>
+                                    <span>终端编号：</span>
+                                    <span>${item.termId}</span>
+                                </div>
+                                <div>
+                                    <span>终端地址：</span>
+                                    <span>${item.termAddr}</span>
+                                </div>
+                                <div>
+                                    <span>终端状态：</span>
+                                    <span>${item.termStatus}</span>
+                                </div>
+                                <div>
+                                    <span>传感器总数：</span>
+                                    <span>${item.sensorCount}</span>
+                                </div>
+                                <div>
+                                    <span>所属子系统：</span>
+                                    <span>${item.systemType}</span>
+                                </div>
+                                <div>
+                                    <span>启用日期：</span>
+                                    <span>${item.openDate}</span>
+                                </div>
+                                <div>
+                                    <span>x坐标：</span>
+                                    <span>${item.termX}</span>
+                                </div>
+                                <div>
+                                    <span>y坐标：</span>
+                                    <span>${item.termY}</span>
+                                </div>
+                            </div>
+                        `;
+                        marker.on('click', this.markerClick);
+                        // marker.emit('click', {target: marker});
+                        marker.setMap(this.map);
+                    })
+                    // this.map.setFitView(); //所有点放在同一个平面
+                }   
+            })
+            .catch(e => {
+                this.$emit('toast', {message: e.rspMessage})
+            })
+        },
+        markerClick(e) {
+            this.infoWindow.setContent(e.target.content);
+            this.infoWindow.open(this.map, e.target.getPosition());
         }
     },
     created(){
@@ -136,7 +231,7 @@ export default {
 
 <style lang="scss" scoped>
     .realTimeWrap {
-        position: relative;
+        height: calc(100% - 4.2rem);
         h2, h4, ul {
             margin: 0;
             padding: 0;
@@ -148,11 +243,11 @@ export default {
             display: flex;
             justify-content: space-between;
             width: 90%;
+            height: .5rem;
             margin: 0 auto;
-            margin-top: .5em;
+            margin-top: .3rem;
             .tabTitleWrap {
-            width: 5.5em;
-            height: 1.8em;
+            width: 2rem;
             text-align: center;
                 h4 {
                     display: inline-block;
@@ -162,35 +257,36 @@ export default {
             .checked {
                 color: #fff;
                 background: rgb(38, 162, 255);
-                border: .06em solid rgb(38, 162, 255);
-                border-radius: .13em;
+                border: 1px solid rgb(38, 162, 255);
+                border-radius: 5px;
             }
         }
         .tabSummary {
+            height: calc(100% - 0.9rem);
             .tabContent {
                 display: flex;
                 justify-content: space-around;
-                margin-top: 1em;
+                margin-top: .2rem;
                 h2 {
                     text-align: center;
-                    padding: 1em 0;
+                    padding: .4rem 0;
                 }
             }
             .tabList {
-                margin-top: 1em;
+                margin-top: .6rem;
                 .tabListItem {
                     display: flex;
                     justify-content: space-between;
                     background: #fff;
-                    padding: 1em 0;
-                    margin-top: .5em;
+                    padding: .2rem 0;
+                    margin-top: .5rem;
                     .itemTitle {
-                        padding-left: 1em;
+                        padding-left: .7rem;
                         .itemBox {
                             display: inline-block;
-                            width: 1.5em;
-                            height: 1.5em;
-                            margin-right: 1em;
+                            width: .5rem;
+                            height: .5rem;
+                            margin-right: .7rem;
                             vertical-align: middle;
                         }
                         .itemColor {
@@ -210,17 +306,14 @@ export default {
                         }
                     }
                     .itemNum {
-                        padding-right: 1em;
+                        padding-right: .5rem;
                     }
                 }
             }
         }
         .mapWrap {
-            position: absolute;
-            top: 1em;
-            bottom: 2em;
-            left: 0;
-            right: 0;
+            margin-top: .2rem;
+            // height: calc(100% - 0.7rem);
         }
     }
 </style>

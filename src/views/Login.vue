@@ -48,6 +48,7 @@ export default {
           if (!orgId) {
             throw new Error('获取机构ID失败')
           }
+          localStorage.setItem('orgId', orgId);
           this.$loading.hide()
           this.$emit('orgid', orgId)
           this.$router.push('/')

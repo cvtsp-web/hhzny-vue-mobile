@@ -11,6 +11,7 @@ function setRem () {
   let fontSize = 100 * (width / 750)
   docEle.setAttribute('data-font-size', fontSize)
   docEle.style.fontSize = fontSize + 'px'
+  return fontSize;
 }
 
 /**

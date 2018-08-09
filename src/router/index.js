@@ -11,6 +11,7 @@ const SensorList = _import('SensorList')
 const MaintainList = _import('MaintainList')
 const AlarmList = _import('AlarmList')
 const Introduction = _import('Introduction')
+const EquipmentDetail = _import('EquipmentDetail')
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/introduction',
       name: 'Introduction',
       component: Introduction
+    },
+    {
+      path: '/equipmentDetail',
+      name: 'EquipmentDetail',
+      component: EquipmentDetail
     }
   ]
 })

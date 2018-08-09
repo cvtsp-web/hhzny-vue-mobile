@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 // 引入mint-ui组件
-import { Button, Cell, Field, DatetimePicker, Popup, Tabbar, TabItem, TabContainer, TabContainerItem } from 'mint-ui'
+import { Button, Cell, Field, DatetimePicker, Popup, Tabbar, TabItem, TabContainer, TabContainerItem, Search } from 'mint-ui'
 // 引入REM适配函数
 import { setRem } from './utils'
 // 引入loading插件
@@ -46,6 +46,7 @@ Vue.component(Tabbar.name, Tabbar)
 Vue.component(TabItem.name, TabItem)
 Vue.component(TabContainer.name, TabContainer)
 Vue.component(TabContainerItem.name, TabContainerItem)
+Vue.component(Search.name, Search)
 
 Vue.use(Loading)
 

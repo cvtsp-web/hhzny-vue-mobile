@@ -32,7 +32,7 @@
         <p>服务窗口</p>
       </div>
     </div> -->
-    <div>
+    <div class="pageWrap">
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="realTime">
           <div class="banner"></div>
@@ -42,6 +42,7 @@
           <Equipment></Equipment>
         </mt-tab-container-item>
         <mt-tab-container-item id="alarm">
+          <Alarm></Alarm>
         </mt-tab-container-item>
         <mt-tab-container-item id="statement">
         </mt-tab-container-item>
@@ -77,11 +78,13 @@
 <script>
 import RealTime from './RealTime'
 import Equipment from './Equipment'
+import Alarm from './Alarm'
 
 export default {
   components: {
     RealTime, 
-    Equipment
+    Equipment,
+    Alarm
   },
   data () {
     return {

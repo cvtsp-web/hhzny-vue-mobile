@@ -114,8 +114,8 @@ export default {
                 }else if(type === 'map'){
                     this.showSummary = false;
                     this.showMap = true;
-                    this.mapHeight = this.winHeight - this.$refs['tabTitle'].getBoundingClientRect().bottom - 55;
-                    //this.getMap();
+                    // this.mapHeight = this.winHeight - this.$refs['tabTitle'].getBoundingClientRect().bottom - 55;
+                    this.getMap();
                 }
             }
         },

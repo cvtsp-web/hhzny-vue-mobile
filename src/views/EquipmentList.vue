@@ -26,62 +26,63 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                data: []
-            }
-        },
-        methods: {
-            getSensors(){
-                this.$axios.get(this.$urls.equipment.sensors, {
-                    params: {
-                        apiVersion: '1.0', 
-                        orgId: localStorage.getItem('orgId')
-                    }
-                })
-                .then(({data: res}) => {
-                    if(res.rspCode === '0000'){
-                        res.sensorList.forEach(item => {
-                            if(item.sensorStatus === '00'){
-                                item.sensorStatus = '正常';
-                            }else if(item.sensorStatus === '01'){
-                                item.sensorStatus = '故障';
-                            }else if(item.sensorStatus === '02'){
-                                item.sensorStatus = '报警';
-                            }else if(item.sensorStatus === '03'){
-                                item.sensorStatus = '断网';
-                            }
 
-                            if(item.systemType === 'EF'){
-                                item.systemType = '电气火灾监控系统';
-                            }else if(item.systemType === 'FP'){
-                                item.systemType = '消防电源监控系统';
-                            }else if(item.systemType === 'FD'){
-                                item.systemType = '防火门监控系统';
-                            }else if(item.systemType === 'EM'){
-                                item.systemType = '电力分项计量监控系统';
-                            }
-                        })
-                        this.data = res.sensorList;
-                    }   
-                })
-                .catch(e => {
-                    this.$emit('toast', {message: e.rspMessage})
-                })
-            },
-            getDetail(item){
-                this.$router.push({
-                    path: '/equipmentDetail', 
-                    name: 'EquipmentDetail',
-                    params: {data: item}
-                })
-            }
-        },
-        created() {
-            this.getSensors();
+export default {
+    data(){
+        return{
+            data: []
         }
+    },
+    methods: {
+        getSensors(){
+            this.$axios.get(this.$urls.equipment.sensors, {
+                params: {
+                    apiVersion: '1.0', 
+                    orgId: localStorage.getItem('orgId')
+                }
+            })
+            .then(({data: res}) => {
+                if(res.rspCode === '0000'){
+                    res.sensorList.forEach(item => {
+                        if(item.sensorStatus === '00'){
+                            item.sensorStatus = '正常';
+                        }else if(item.sensorStatus === '01'){
+                            item.sensorStatus = '故障';
+                        }else if(item.sensorStatus === '02'){
+                            item.sensorStatus = '报警';
+                        }else if(item.sensorStatus === '03'){
+                            item.sensorStatus = '断网';
+                        }
+
+                        if(item.systemType === 'EF'){
+                            item.systemType = '电气火灾监控系统';
+                        }else if(item.systemType === 'FP'){
+                            item.systemType = '消防电源监控系统';
+                        }else if(item.systemType === 'FD'){
+                            item.systemType = '防火门监控系统';
+                        }else if(item.systemType === 'EM'){
+                            item.systemType = '电力分项计量监控系统';
+                        }
+                    })
+                    this.data = res.sensorList;
+                }   
+            })
+            .catch(e => {
+                this.$emit('toast', {message: e.rspMessage})
+            })
+        },
+        getDetail(item){
+            this.$router.push({
+                path: '/equipmentDetail', 
+                name: 'equipmentDetail',
+                params: {data: item}
+            })
+        }
+    },
+    created() {
+        this.getSensors();
     }
+}
 </script>
 
 <style lang="scss" scoped>

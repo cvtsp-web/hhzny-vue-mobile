@@ -1,5 +1,6 @@
 <template>
     <div class="realTimeWrap">
+        <div class="banner"></div>
         <div class="tabTitle" ref="tabTitle">
             <div :class="['tabTitleWrap', titleCheck === 'summary' && 'checked']" @click="changeTab('summary')">
                 <h4>概括总览</h4>
@@ -119,11 +120,10 @@ export default {
                 }
             }
         },
-        //初始化地图 住需要加载一次
+        //初始化地图
         getMap(){
             let screenHeight = window.screen.height;
             let scal = (4.84 * setRem() + 55)/screenHeight;
-            // console.log(scal)
             this.mapStyle = {
                 width: window.screen.width/setRem() + 'rem',
                 height: screenHeight*(1-scal)/setRem() + 'rem'
@@ -234,6 +234,11 @@ export default {
 <style lang="scss" scoped>
     .realTimeWrap {
         height: calc(100% - 4.2rem);
+        .banner {
+            width: 100%;
+            height: 3.84rem;
+            background: url("../assets/img/banner.png") center center / 100% 100% no-repeat;
+        }
         h2, h4, ul {
             margin: 0;
             padding: 0;

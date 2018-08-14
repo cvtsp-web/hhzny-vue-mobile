@@ -99,9 +99,6 @@ export default {
       margin-top: 20px;
     }
   }
-
-  .rem {
-  }
 </style>
 
 <style lang="scss">

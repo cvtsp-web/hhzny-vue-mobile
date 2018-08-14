@@ -24,7 +24,7 @@ module.exports = {
         changeOrigin: true
       },
       '/wechat': {
-        target: ' https://easy-mock.com/mock/5b69359d99b4c7086b576c4d',
+        target: 'https://easy-mock.com/mock/5b69359d99b4c7086b576c4d',
         changeOrigin: true
       }
     },

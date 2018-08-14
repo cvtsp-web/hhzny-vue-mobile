@@ -33,7 +33,7 @@
       </div>
     </div> -->
     <div class="pageWrap">
-      <mt-tab-container v-model="selected">
+      <!-- <mt-tab-container v-model="selected">
         <mt-tab-container-item id="realTime">
           <div class="banner"></div>
           <RealTime></RealTime>
@@ -48,13 +48,14 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="mine">
         </mt-tab-container-item>
-      </mt-tab-container>
+      </mt-tab-container> -->
+      <router-view />
       <mt-tabbar v-model="selected" fixed>
         <mt-tab-item id="realTime">
           <img slot="icon">
           实时
         </mt-tab-item>
-        <mt-tab-item id="dataList">
+        <mt-tab-item id="equipmentList">
           <img slot="icon">
           数据列表信息
         </mt-tab-item>
@@ -76,30 +77,28 @@
 </template>
 
 <script>
-import RealTime from './RealTime'
-import Equipment from './Equipment'
-import Alarm from './Alarm'
-
 export default {
-  components: {
-    RealTime, 
-    Equipment,
-    Alarm
-  },
+  components: {},
   data () {
     return {
       selected: 'realTime'
+    }
+  },
+  watch: {
+    selected(newVal) {
+      this.$router.push(newVal);
+    },
+    '$route.name': {
+      immediate: true,
+      handler(newVal) {
+        this.selected = newVal;
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .banner {
-    width: 100%;
-    height: 3.84rem;
-    background: url("../assets/img/banner.png") center center / 100% 100% no-repeat;
-  }
   .menu-list {
     display: flex;
     justify-content: space-around;

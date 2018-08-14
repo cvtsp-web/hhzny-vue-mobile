@@ -6,7 +6,7 @@ function setRem () {
   // 获得屏幕宽度
   let width = docEle.getBoundingClientRect().width
   if (width <= 320) width = 320
-  if (width >= 480) width = 480
+  if (width >= 750) width = 750
   // 将屏幕分为100份 屏幕基准为iphone6的750px
   let fontSize = 100 * (width / 750)
   docEle.setAttribute('data-font-size', fontSize)

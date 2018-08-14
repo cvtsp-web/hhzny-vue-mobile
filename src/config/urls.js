@@ -22,5 +22,6 @@ export default {
   },
   equipment: {
     sensors: '/wechat/sensors'
-  }
+  },
+  alarmList: '/wechat/alarms'
 }

@@ -19,7 +19,7 @@
             </div>
             <div v-for="(i, index) in 12" :key="index" class="item">
                 <span>通道{{index+1}}检测值：</span>
-                <span>{{detailData['tunnl' + (index+1)]}}</span>
+                <span>{{detailData['tunnel' + (index+1)]}}</span>
             </div>
         </div>
         <div v-if="detailData.systemType === '电力分项计量监控系统'">

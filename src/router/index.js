@@ -5,13 +5,19 @@ const _import = require(process.env.NODE_ENV === 'production' ? './asyncImport.j
 
 const Login = _import('Login')
 const Index = _import('Index')
+
 const Overview = _import('Overview')
 const TerminalList = _import('TerminalList')
 const SensorList = _import('SensorList')
 const MaintainList = _import('MaintainList')
 const AlarmList = _import('AlarmList')
-const Introduction = _import('Introduction')
+
+const RealTime = _import('RealTime')
+const EquipmentList = _import('EquipmentList')
 const EquipmentDetail = _import('EquipmentDetail')
+const Alarm = _import('Alarm')
+const Mine = _import('Mine')
+const Introduction = _import('Introduction')
 
 Vue.use(Router)
 
@@ -25,8 +31,46 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      redirect: '/realTime',
+      component: Index,
+      children: [
+        {
+          path: '/realTime',
+          name: 'realTime',
+          component: RealTime
+        },
+        {
+          path: '/equipmentList',
+          name: 'equipmentList',
+          component: EquipmentList
+        },
+        {
+          path: '/alarm',
+          name: 'alarm',
+          component: Alarm
+        },
+        {
+          path: '/mine',
+          name: 'mine',
+          component: Mine
+        }
+      ]
     },
+    {
+      path: '/equipmentDetail',
+      name: 'equipmentDetail',
+      component: EquipmentDetail
+    },
+    {
+      path: '/introduction',
+      name: 'introduction',
+      component: Introduction
+    },
+
+
+
+
+    
     {
       path: '/overview',
       name: 'Overview',
@@ -55,15 +99,7 @@ export default new Router({
       component: AlarmList,
       meta: {keepAlive: true}
     },
-    {
-      path: '/introduction',
-      name: 'Introduction',
-      component: Introduction
-    },
-    {
-      path: '/equipmentDetail',
-      name: 'EquipmentDetail',
-      component: EquipmentDetail
-    }
+    
+    
   ]
 })

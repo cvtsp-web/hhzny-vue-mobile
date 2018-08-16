@@ -16,6 +16,7 @@ const RealTime = _import('RealTime')
 const EquipmentList = _import('EquipmentList')
 const EquipmentDetail = _import('EquipmentDetail')
 const Alarm = _import('Alarm')
+const Report = _import('Report')
 const Mine = _import('Mine')
 const Introduction = _import('Introduction')
 
@@ -50,6 +51,11 @@ export default new Router({
           component: Alarm
         },
         {
+          path: '/report',
+          name: 'report',
+          component: Report
+        },
+        {
           path: '/mine',
           name: 'mine',
           component: Mine
@@ -70,7 +76,7 @@ export default new Router({
 
 
 
-    
+
     {
       path: '/overview',
       name: 'Overview',

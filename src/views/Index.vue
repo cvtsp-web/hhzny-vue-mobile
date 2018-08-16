@@ -63,7 +63,7 @@
           <img slot="icon">
           报警
         </mt-tab-item>
-        <mt-tab-item id="statement">
+        <mt-tab-item id="report">
           <img slot="icon">
           报表
         </mt-tab-item>

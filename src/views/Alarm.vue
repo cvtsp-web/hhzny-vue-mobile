@@ -4,9 +4,9 @@
         <div class="form-group">
             <p class="form-label">报警类型</p>
             <div class="check-list">
-                <span :class="{active: alarmType === '全部'}" @click="changeType('全部')" class="item">全部</span>
-                <span :class="{active: alarmType === '报警'}" @click="changeType('报警')" class="item">报警</span>
-                <span :class="{active: alarmType === '故障'}" @click="changeType('故障')" class="item">故障</span>
+                <span :class="{active: alarmType === '0'}" @click="changeType('0')" class="item">全部</span>
+                <span :class="{active: alarmType === '1'}" @click="changeType('1')" class="item">报警</span>
+                <span :class="{active: alarmType === '2'}" @click="changeType('2')" class="item">故障</span>
             </div>
         </div>
         <div class="alarmContent">
@@ -18,7 +18,7 @@
                     </div>
                     <div>
                         <h3>{{item.alarmTypeDesc}}</h3>
-                        <div>{{item.alarmType}}</div>
+                        <div>{{item.alarmCodeDesc}}</div>
                         <div>{{item.sensorId}}</div>
                         <div>{{item.sensorAddr}}</div>
                         <div>{{item.alarmDate}}</div>
@@ -41,7 +41,7 @@
                 apiVersion: '1.0',
                 orgId: localStorage.getItem('orgId'),
                 key: '',
-                alarmType: '全部',
+                alarmType: '0',
                 showNoMoreData: false
             }
         },
@@ -57,13 +57,13 @@
                 })
                 .then(({data: res}) => {
                     if(res.rspCode === '0000'){
-                        res.alarmList.forEach(item => {
-                            if(item.alarmType === '1'){
-                                item.alarmType = '故障报警';
-                            }else if(item.alarmType === '2'){
-                                item.alarmType = '监控报警';
-                            }
-                        })
+                        // res.alarmList.forEach(item => {
+                        //     if(item.alarmType === '1'){
+                        //         item.alarmType = '故障报警';
+                        //     }else if(item.alarmType === '2'){
+                        //         item.alarmType = '监控报警';
+                        //     }
+                        // })
                         this.allData = res.alarmList;
                         this.alarmData = this.allData;
                     }
@@ -77,13 +77,13 @@
                 this.alarmType = type;
 
                 if(this.addressValue){
-                    if(type === '全部'){
+                    if(type === '0'){
                         this.alarmData = this.allData.filter(item => item.sensorAddr.indexOf(this.addressValue) !== -1);
                     }else{
                         this.alarmData = this.allData.filter(item => (item.sensorAddr.indexOf(this.addressValue) !== -1 && item.alarmType === type));
                     } 
                 }else{
-                    if(type === '全部'){
+                    if(type === '0'){
                         this.alarmData = this.allData;
                     }else{
                         this.alarmData = this.allData.filter(item => item.alarmType === type);
@@ -92,7 +92,7 @@
             },
             //地址改变数据改变
             changeAlarmData(value){
-                if(this.alarmType === '全部'){
+                if(this.alarmType === '0'){
                     if(!value){
                         this.alarmData = this.allData;
                     }else{

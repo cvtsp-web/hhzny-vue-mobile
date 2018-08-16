@@ -16,6 +16,7 @@ export default {
     list: '/api/powerMonitoring/query'
   },
 
+
   realTime: {
     summary: '/wechat/summary',
     terminals: '/wechat/terminals'
@@ -23,5 +24,13 @@ export default {
   equipment: {
     sensors: '/wechat/sensors'
   },
-  alarmList: '/wechat/alarms'
+  alarmList: '/wechat/alarms',
+  report: {
+    hourlyDanger: '/wechat/hourlyDanger',
+    weeklyDanger: '/wechat/weeklyDanger',
+    monthlyDanger :'/wechat/monthlyDanger',
+    weeklyEFSummary: '/wechat/weeklyEFSummary',
+    hourlyEMSummary: '/wechat/hourlyEMSummary',
+    monthlyEMSummary: '/wechat/monthlyEMSummary'
+  }
 }

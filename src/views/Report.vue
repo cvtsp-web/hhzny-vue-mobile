@@ -5,12 +5,14 @@
             <div :class="['title', titleCheck === 'report' && 'active']" @click="changeTab('report')">数据统计</div>
         </div>
         <div class="content">
-
+            <div id="main" style="height: 500px;"></div>
         </div>
     </div>
 </template>
 
 <script>
+    import echarts from 'echarts';
+
     export default {
         data(){
             return {
@@ -43,6 +45,10 @@
                 })
                 .catch(e => {
                     this.$emit('toast', {message: e.rspMessage})
+                })
+                const hourlyDangerChart = echarts.init(document.getElementById('main'));
+                hourlyDangerChart.setOption({
+                    
                 })
             }
         },

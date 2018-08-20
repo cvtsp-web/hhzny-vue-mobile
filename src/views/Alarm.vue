@@ -51,8 +51,7 @@
                 this.$axios.get(this.$urls.alarmList, {
                     params: {
                         apiVersion, 
-                        orgId,
-                        alarmType
+                        orgId
                     }
                 })
                 .then(({data: res}) => {
@@ -96,7 +95,12 @@
                     if(!value){
                         this.alarmData = this.allData;
                     }else{
-                        this.alarmData = this.allData.filter(item => item.sensorAddr.indexOf(value) !== -1);
+                        this.alarmData = this.allData.filter((item, index) => {
+                            if(item.sensorAddr){
+                               return (item.sensorAddr).indexOf(value) !== -1;
+                            }
+                        })
+                        // this.alarmData = this.allData.filter(item => (item.sensorAddr).indexOf(value) !== -1);
                     }
                 }else{
                     if(!value){

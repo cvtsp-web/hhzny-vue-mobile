@@ -15,7 +15,7 @@
                             <div>{{item.sensorId}}</div>
                             <div>{{item.systemType}}</div>
                             <div>{{item.sensorAddr}}</div>
-                            <div>{{item.lastUpdateDate}}</div>
+                            <div>{{item.lastUpDateDate}}</div>
                         </div>
                         <div class="listStatus">{{item.sensorStatus}}</div>
                    </li>

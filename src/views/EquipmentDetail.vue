@@ -10,7 +10,7 @@
         </div>
         <div class="item">
             <span>上送时间：</span>
-            <span>{{detailData.lastUpdateDate}}</span>
+            <span>{{detailData.lastUpDateDate}}</span>
         </div>
         <div v-if="detailData.systemType === '电气火灾监控系统'">
             <div class="item">

@@ -31,6 +31,7 @@ export default {
     monthlyDanger :'/wechat/monthlyDanger',
     weeklyEFSummary: '/wechat/weeklyEFSummary',
     hourlyEMSummary: '/wechat/hourlyEMSummary',
-    monthlyEMSummary: '/wechat/monthlyEMSummary'
+    monthlyEMSummary: '/wechat/monthlyEMSummary',
+    efSensors: '/wechat/efSensors'
   }
 }

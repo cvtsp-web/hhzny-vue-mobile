@@ -130,8 +130,8 @@ export default {
             }
             this.map = new AMap.Map('container', {
                 resizeEnable: true,
-                center: [121.475137, 31.232781],
-                zoom: 13
+                // center: [116.397428, 39.90923],
+                // zoom: 13
             });
 
             //获取终端列表

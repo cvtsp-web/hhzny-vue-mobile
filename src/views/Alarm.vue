@@ -183,7 +183,7 @@
         }
         .alarmContent {
             margin-top: .5rem;
-            margin-bottom: 55px;
+            margin-bottom: 60px;
             .showNoData {
                 text-align: center;
             }

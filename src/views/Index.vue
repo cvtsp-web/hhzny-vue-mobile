@@ -98,7 +98,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  // .tabBar {
+  //   z-index: 10;
+  // }
+  // .mint-tabbar {
+  //   z-index: 10;
+  // }
+  // .is-fixed {
+  //   z-index: 10;
+  // }
   .menu-list {
     display: flex;
     justify-content: space-around;

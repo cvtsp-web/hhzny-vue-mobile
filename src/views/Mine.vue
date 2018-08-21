@@ -58,7 +58,7 @@
             background: url("../assets/img/banner.png") center center / 100% 100% no-repeat;
         }
         .mineContent {
-            margin-bottom: 55px;
+            margin-bottom: 60px;
             .list {
                 .listItem {
                     display: flex;

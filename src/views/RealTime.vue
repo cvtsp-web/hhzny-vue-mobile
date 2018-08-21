@@ -65,7 +65,7 @@
                 </ul>
             </div>
         </div>
-        <div class="mapWrap" id="container" :style="mapStyle"></div>
+        <div v-show="showMap" class="mapWrap" id="container" :style="mapStyle"></div>
     </div>
 </template>
 
@@ -128,7 +128,7 @@ export default {
         //初始化地图
         getMap(){
             let screenHeight = window.screen.height;
-            let scal = (4.84 * setRem() + 55)/screenHeight;
+            let scal = (4.84 * setRem() + 60)/screenHeight;
             this.mapStyle = {
                 width: window.screen.width/setRem() + 'rem',
                 height: screenHeight*(1-scal)/setRem() + 'rem'
@@ -245,7 +245,8 @@ export default {
 
 <style lang="scss" scoped>
     .realTimeWrap {
-        height: calc(100% - 4.2rem);
+        // height: calc(100% - 4.2rem);
+        margin-bottom: 60px;
         .banner {
             width: 100%;
             height: 3.84rem;
@@ -281,7 +282,7 @@ export default {
             }
         }
         .tabSummary {
-            height: calc(100% - 0.9rem);
+            // height: calc(100% - 0.9rem);
             .tabContent {
                 display: flex;
                 justify-content: space-around;
@@ -332,6 +333,7 @@ export default {
         }
         .mapWrap {
             margin-top: .2rem;
+            z-index: 0;
             // height: calc(100% - 0.7rem);
         }
     }

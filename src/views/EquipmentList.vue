@@ -94,7 +94,7 @@ export default {
 
 <style lang="scss" scoped>
     .equipmentWrap {
-        margin-bottom: 55px;
+        margin-bottom: 60px;
         ul {
             margin: 0;
             padding: 0;

@@ -83,7 +83,9 @@ export default {
                 width: null,
                 height: null
             },
-            terminalsData: []
+            terminalsData: [],
+            summaryTimer: null,
+            mapTimer: null
         }
     },
     methods: {
@@ -98,6 +100,9 @@ export default {
             .then(({data: res}) => {
                 if(res.rspCode === '0000'){
                     this.summaryMsg = res;
+                    this.summaryTimer = setTimeout(() => {
+                        this.getSummary()
+                    },60000)
                 }   
             })
             .catch(e => {
@@ -213,6 +218,9 @@ export default {
                         marker.setMap(this.map);
                     })
                     // this.map.setFitView(); //所有点放在同一个平面
+                    this.mapTimer = setTimeout(() => {
+                        this.getTerminals()
+                    },30000)
                 }   
             })
             .catch(e => {
@@ -227,6 +235,10 @@ export default {
     created(){
         //默认获取概括总览信息
         this.getSummary();
+    },
+    beforeDestroy() {
+        clearTimeout(this.summaryTimer);
+        clearTimeout(this.mapTimer);
     }
 }
 </script>

@@ -42,7 +42,8 @@
                 orgId: localStorage.getItem('orgId'),
                 key: '',
                 alarmType: '0',
-                showNoMoreData: false
+                showNoMoreData: false,
+                alarmTimer: null
             }
         },
         methods: {
@@ -65,6 +66,9 @@
                         // })
                         this.allData = res.alarmList;
                         this.alarmData = this.allData;
+                        this.alarmTimer = setTimeout(() => {
+                            this.getAlarmData(this.apiVersion, this.orgId)
+                        },60000)
                     }
                 })
                 .catch(e => {
@@ -126,6 +130,9 @@
                     this.showNoMoreData = false;
                 }
             }
+        },
+        beforeDestroy() {
+            clearTimeout(this.alarmTimer);
         }
     }
 </script>

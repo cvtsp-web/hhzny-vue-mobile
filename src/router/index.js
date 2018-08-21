@@ -77,34 +77,34 @@ export default new Router({
 
 
 
-    {
-      path: '/overview',
-      name: 'Overview',
-      component: Overview
-    },
-    {
-      path: '/terminal/list',
-      name: 'TerminalList',
-      component: TerminalList,
-      meta: {keepAlive: true}
-    },
-    {
-      path: '/sensor/list',
-      name: 'SensorList',
-      component: SensorList
-    },
-    {
-      path: '/maintain/list',
-      name: 'MaintainList',
-      component: MaintainList,
-      meta: {keepAlive: true}
-    },
-    {
-      path: '/alarm/list',
-      name: 'AlarmList',
-      component: AlarmList,
-      meta: {keepAlive: true}
-    },
+    // {
+    //   path: '/overview',
+    //   name: 'Overview',
+    //   component: Overview
+    // },
+    // {
+    //   path: '/terminal/list',
+    //   name: 'TerminalList',
+    //   component: TerminalList,
+    //   meta: {keepAlive: true}
+    // },
+    // {
+    //   path: '/sensor/list',
+    //   name: 'SensorList',
+    //   component: SensorList
+    // },
+    // {
+    //   path: '/maintain/list',
+    //   name: 'MaintainList',
+    //   component: MaintainList,
+    //   meta: {keepAlive: true}
+    // },
+    // {
+    //   path: '/alarm/list',
+    //   name: 'AlarmList',
+    //   component: AlarmList,
+    //   meta: {keepAlive: true}
+    // },
     
     
   ]

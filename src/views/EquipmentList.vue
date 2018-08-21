@@ -30,7 +30,8 @@
 export default {
     data(){
         return{
-            data: []
+            data: [],
+            sensorTimer: null
         }
     },
     methods: {
@@ -65,6 +66,9 @@ export default {
                         }
                     })
                     this.data = res.sensorList;
+                    this.sensorTimer = setTimeout(() => {
+                        this.getSensors()
+                    },30000)
                 }   
             })
             .catch(e => {
@@ -81,6 +85,9 @@ export default {
     },
     created() {
         this.getSensors();
+    },
+    beforeDestroy() {
+        clearTimeout(this.getSensors);
     }
 }
 </script>

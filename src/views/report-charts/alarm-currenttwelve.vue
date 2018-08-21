@@ -46,7 +46,8 @@
                             }
                         }
                     ]
-                }
+                },
+                reportTimer: null
             }
         },
         computed: {
@@ -99,6 +100,9 @@
                     if(res.rspCode === '0000'){
                         // this.hourlyDangerData = res;
                         this.detailReturnData(res);
+                        this.reportTimer = setTimeout(() => {
+                            this.getChartReturnData()
+                        },60000)
                     }
                 })
                 .catch(e => {
@@ -149,6 +153,9 @@
                     ]
                 }
             }
+        },
+        beforeDestroy() {
+            clearTimeout(this.reportTimer);
         }
     }
 </script>

@@ -13,7 +13,7 @@
                 </li>
             </ul>
             <div class="btnWrap">
-                <mt-button type="danger" size="small" class="btn">注销用户</mt-button>
+                <mt-button type="danger" size="small" class="btn" @click="handelOut">注销用户</mt-button>
             </div>
         </div>
     </div>
@@ -33,6 +33,13 @@
                     path: '/introduction', 
                     name: 'introduction'
                 })
+            },
+            handelOut(){
+                this.$router.push({
+                    path: '/login', 
+                    name: 'Login'
+                });
+                sessionStorage.setItem('token', null);
             }
         }
     }

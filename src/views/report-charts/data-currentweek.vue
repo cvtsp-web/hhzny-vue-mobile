@@ -63,7 +63,8 @@
                             }
                         }
                     ]
-                }
+                },
+                weekTimer: null
             }
         },
         methods: {
@@ -133,6 +134,9 @@
                 .then(({data: res}) => {
                     if(res.rspCode === '0000'){
                         this.detailReturnData(res);
+                        this.weekTimer = setTimeout(() => {
+                            this.getChartReturnData()
+                        },3000)
                     }
                 })
                 .catch(e => {
@@ -177,9 +181,11 @@
         },
         watch: {
             chartData(newVal) {
-                console.log('update', newVal);
                 this.chart.setOption(Object.assign(this.defaultOptions, newVal));
             }
+        },
+        beforeDestroy() {
+            clearTimeout(this.weekTimer);
         }
     }
 </script>

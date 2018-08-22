@@ -136,7 +136,7 @@
                         this.detailReturnData(res);
                         this.weekTimer = setTimeout(() => {
                             this.getChartReturnData()
-                        },3000)
+                        },60000)
                     }
                 })
                 .catch(e => {
@@ -185,6 +185,7 @@
             }
         },
         beforeDestroy() {
+            // console.log('beforeDestroy')
             clearTimeout(this.weekTimer);
         }
     }

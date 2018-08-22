@@ -87,7 +87,7 @@ export default {
         this.getSensors();
     },
     beforeDestroy() {
-        clearTimeout(this.getSensors);
+        clearTimeout(this.sensorTimer);
     }
 }
 </script>

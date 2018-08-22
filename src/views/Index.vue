@@ -57,7 +57,7 @@
         </mt-tab-item>
         <mt-tab-item id="equipmentList">
           <img slot="icon">
-          数据列表信息
+          数据
         </mt-tab-item>
         <mt-tab-item id="alarm">
           <img slot="icon">

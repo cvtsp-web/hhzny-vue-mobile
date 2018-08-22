@@ -66,6 +66,8 @@
                         // })
                         this.allData = res.alarmList;
                         this.alarmData = this.allData;
+                        this.changeType(this.alarmType);
+                        this.changeAlarmData(this.addressValue);
                         this.alarmTimer = setTimeout(() => {
                             this.getAlarmData(this.apiVersion, this.orgId)
                         },60000)
@@ -110,7 +112,11 @@
                     if(!value){
                         this.alarmData = this.allData.filter(item => item.alarmType === this.alarmType);
                     }else{
-                        this.alarmData = this.allData.filter(item => (item.sensorAddr.indexOf(value) !== -1 && item.alarmType === this.alarmType));
+                        this.alarmData = this.allData.filter(item => {
+                            if(item.sensorAddr){
+                                return (item.sensorAddr.indexOf(value) !== -1 && item.alarmType === this.alarmType)
+                            }
+                        });
                     }
                 }
             }

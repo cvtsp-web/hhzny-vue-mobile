@@ -80,11 +80,13 @@
                         value: item.value
                     }
                 });
+                
                 return  {
                     // tooltip: {
                     //     trigger: 'item',
                     //     formatter: "{a} <br/>{b} : {c} ({d}%)"
                     // },
+                    // color: ['ccfbf3', 'b9dcfb', 'cac6fd', 'f7e6ca', 'fab7ad', 'f8c7ef', 'c0cbcb', 'b1c1b0'],
                     legend: {
                         data: mess.map(item => item.name)
                     },
@@ -98,7 +100,10 @@
                             normal: {
                                 label: {
                                     show: true,
-                                    formatter: '{c} ({d}%)'
+                                    formatter: '{c} \n ({d}%)',
+                                    textStyle: {
+                                        fontSize: 12
+                                    }
                                 }
                             }
                         },
@@ -107,13 +112,19 @@
                         //         show:true,
                         //         position:'inner', //标签的位置
                         //         textStyle : {
-                        //             fontWeight : 300 ,
-                        //             fontSize : 16    //文字的字体大小
+                        //             // fontWeight : 300 ,
+                        //             fontSize : 12   //文字的字体大小
                         //         },
                         //         formatter:'{d}%'
-
-                                
                         //     }
+                        //     // normal:{
+                        //     //     formatter(v) {
+                        //     //         let text = v.name
+                        //     //         return text.length < 4 
+                        //     //             ? text 
+                        //     //             : `${text.slice(0,4)}\n${text.slice(4)}`
+                        //     //     }
+                        //     // }  
                         // },
                         data: mess
                     }],
